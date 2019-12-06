@@ -1,0 +1,56 @@
+
+.col-class{
+    height: 45px;
+    line-height: 45px;
+    text-align: left;
+    font-size: 14px;
+    padding: 0px 0px!important;
+}
+.but {
+    height: 32px!important;
+    line-height: 32px!important
+}
+
+.row {
+  height: 45px
+}
+
+.title{
+  font-size: 14px;
+  background:#fff;
+  line-height:32px;
+
+}
+
+.gitem{
+  width: 50%!important;
+}
+
+.ider{
+  height: 20px!important;
+}
+
+.mcard {
+  padding: 0px 16px!important;
+  color: #80848f;
+  height: 36px
+}
+
+.next {
+  height: 10px
+}
+
+.icon {
+  text-align: center;
+  font-size: 14px;
+}
+
+.show {
+  /* display: flex;
+  align-items: center */
+  color: #2d8cf0;
+}
+
+.input{
+  height: 45!important;
+}

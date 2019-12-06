@@ -1,0 +1,21 @@
+
+@import '../model/model.wxss';
+.head {
+  background-color: #ff9900!important;
+  /* color:aliceblue!important; */
+}
+
+.next{
+  margin-top: 20px!important;
+}
+
+.row{
+  display: flex;
+  padding-right: 1px;
+}
+
+.right {
+  padding-top: 8px;
+}
+
+

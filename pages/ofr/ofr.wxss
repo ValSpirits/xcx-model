@@ -1,0 +1,14 @@
+.cell-panel-demo{
+    display: block;
+    margin-top: 15px;
+}
+
+.btn {
+  margin: 0px!important;
+  height: 28px!important;
+  line-height: 28px!important
+}
+
+.next{
+  margin-top: 8px!important; 
+}

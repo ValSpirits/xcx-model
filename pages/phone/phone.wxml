@@ -1,0 +1,104 @@
+<view>   
+<i-row i-class= "row">
+    <i-col span="18" i-class='col-class'>
+      <i-input value="{{ phone }}" title="号码" autofocus placeholder="请输入号码" i-class="input"/>
+    </i-col>
+    <i-col span="3" offset="3" i-class='col-class'>
+      <i-icon type="search" size="22" color="#80848f"/>
+      <!-- <i-button i-class="but" bind:click="handleClick" type="primary">搜索</i-button> -->
+    </i-col>
+</i-row>
+
+<i-row i-class= "row">
+    <i-col span="6" i-class='col-class'> 
+       <i-input title="运营商" disabled='true'/> 
+    </i-col> 
+    <i-col span="6" i-class='col-class'> 
+      <view class='show' bindtap="handleOpen">{{actions[networkIndex].name}}</view>
+    </i-col>
+
+
+    <i-col span="6" i-class='col-class'>
+      <i-input title="归属地" disabled='true'/>
+    </i-col>
+    <i-col span="6" i-class='col-class'>
+      <view class='show' bindtap="toCity">
+      <i-icon type="coordinates" size="26" color="#80848f" />
+      {{area.name}}
+      </view>
+   </i-col>
+</i-row>
+<i-row i-class= "row">
+    <i-col span="18" i-class='col-class'>
+      <i-input value="{{ value5 }}"  title="套餐" disabled='true' placeholder="请选择套餐"/>
+    </i-col>
+    <i-col span="3" i-class='col-class' offset="3">
+      <i-icon type="enter" bindtap="toOfr" size="22" color="#80848f"/>
+      <!-- <i-button i-class="but" type="ghost" bind:click="toOfr">请选择套餐</i-button> -->
+   </i-col>
+</i-row>
+<!-- <i-row>
+    <i-col span="17" i-class='col-class'>
+      <i-input value="{{ value5 }}" inline title="号码" autofocus placeholder="请输入号码"/>
+    </i-col>
+    <i-col span="6" offset="1" i-class='col-class'>
+      <i-button i-class="searchButton" bind:click="handleClick" type="primary">搜索</i-button>
+    </i-col>
+</i-row> -->
+     <view>
+        <i-divider i-class="ider"></i-divider>
+    </view> 
+
+
+    <!-- <i-cell-group>
+        <i-cell title="电信" label="上海" value="17002110035"></i-cell>
+        <i-cell title="电信" label="上海" value="17002110035"></i-cell>
+        <i-cell title="电信" label="上海" value="17002110035"></i-cell>
+    </i-cell-group> -->
+
+<view>
+    <i-card title="电信" extra="上海" content="17002110035" i-class="mcard">
+    </i-card>
+    <view class='next'></view>
+
+    <i-card title="电信" extra="上海" content="17002110035" i-class="mcard">
+    </i-card>
+    <view class='next'></view>
+
+    <i-card title="电信" extra="上海" content="17002110035" i-class="mcard">
+    </i-card>
+    <view class='next'></view>
+
+    <i-card title="电信" extra="上海" content="17002110035" i-class="mcard">
+    </i-card>
+    <view class='next'></view>
+
+    <i-card title="电信" extra="上海" content="17002110035" i-class="mcard">
+    </i-card>
+    <view class='next'></view>
+
+    <i-card title="电信" extra="上海" i-class="mcard" content="17002110035">
+    </i-card>
+    <view class='next'></view>
+
+        <i-card title="电信" extra="上海" i-class="mcard" content="17002110035">
+    </i-card>
+    <view class='next'></view>
+
+        <i-card title="电信" extra="上海" i-class="mcard" content="17002110035">
+    </i-card>
+    <view class='next'></view>
+</view>
+
+<view class='next'></view>
+<view class="icon">
+<i-icon type="refresh" size="26" color="#2d8cf0"></i-icon>换一批
+</view>
+<view class='next'></view>
+<i-button bind:click="handleClick" type="primary" shape="circle" size="small">下一步</i-button>
+</view>
+
+
+
+
+<i-action-sheet visible="{{ visible }}" actions="{{ actions }}" bind:click="handleClickItem" />

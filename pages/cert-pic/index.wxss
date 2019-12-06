@@ -1,0 +1,22 @@
+.img {
+  width: 200px;
+  height: 137px;
+  /* display: flex;
+  justify-content:center;
+  flex-direction: row;
+  align-items: center; */
+}
+
+
+.show {
+  display: flex;
+  justify-content:center;
+  /* flex-direction: row; */
+  align-items: center;
+  width: 100%
+}
+
+.head {
+  background-color: #ff9900!important;
+  /* color:aliceblue!important; */
+}

@@ -1,0 +1,75 @@
+<i-notice-bar icon="systemprompt" i-class="head">
+  请于29:30秒内完成订单
+</i-notice-bar>
+
+<i-panel title="选号信息" i-class="panel">
+  <i-row>
+    <i-col span="7" i-class="leftCol">号码：</i-col>
+    <i-col span="16" i-class="rightCol"></i-col>
+  </i-row>
+  <i-row>
+    <i-col span="7" i-class="leftCol">预存话费：</i-col>
+    <i-col span="16" i-class="rightCol"> </i-col>
+  </i-row>
+  <i-row>
+    <i-col span="7" i-class="leftCol">号码归属地：</i-col>
+    <i-col span="16" i-class="rightCol"></i-col>
+  </i-row>
+  <i-row>
+    <i-col span="7" i-class="leftCol">运营商：</i-col>
+    <i-col span="16" i-class="rightCol"></i-col>
+  </i-row>
+  <i-row>
+    <i-col span="7" i-class="leftCol">所选套餐：</i-col>
+    <i-col span="16" i-class="rightCol"></i-col>
+  </i-row>
+  <i-row>
+    <i-col span="7" i-class="leftCol"> 套餐内容：</i-col>
+    <i-col span="16" i-class="rightCol"></i-col>
+  </i-row>
+</i-panel>
+
+
+<i-panel title="机主信息" i-class="panel">
+  <i-row>
+    <i-col span="7" i-class="leftCol">姓名：</i-col>
+    <i-col span="16" i-class="rightCol"></i-col>
+  </i-row>
+  <i-row>
+    <i-col span="7" i-class="leftCol">身份证号码：</i-col>
+    <i-col span="16" i-class="rightCol"> </i-col>
+  </i-row>
+  <i-row>
+    <i-col span="7" i-class="leftCol">身份证地址：</i-col>
+    <i-col span="16" i-class="rightCol"></i-col>
+  </i-row>
+</i-panel>
+
+<i-panel title="寄送信息" i-class="panel">
+  <i-row>
+    <i-col span="7" i-class="leftCol"> 收件人：</i-col>
+    <i-col span="16" i-class="rightCol"></i-col>
+  </i-row>
+  <i-row>
+    <i-col span="7" i-class="leftCol">联系电话：</i-col>
+    <i-col span="16" i-class="rightCol"></i-col>
+  </i-row>
+  <i-row>
+    <i-col span="7" i-class="leftCol">收件地址：</i-col>
+    <i-col span="16" i-class="rightCol"></i-col>
+  </i-row>
+</i-panel>
+
+<i-card title="温馨提示" i-class="next">
+  <view slot="content">订单初审通过后我们会将卡寄出，请在收到卡后的20日内完成视频认证，视频认证途径：关注长江时代微信公众号（cjmobile）-“帮助”-“更多”-“视频认证”。卡一经寄出，无法退款，感谢您的理解和支持。
+  </view>
+  <view slot="footer" class="foot">
+      <i-radio value="我已阅读并同意" disabled="{{disabled}}" checked="{{checked}}" bindchange="handleAnimalChange" i-class="radio">
+      </i-radio>
+      <view class="red">
+        《用户入网协议》
+      </view>
+  </view>
+</i-card>
+
+<i-button bind:click="handleClick" shape="circle" size="small" type="info"  i-class="btn">确认并支付￥50元</i-button>

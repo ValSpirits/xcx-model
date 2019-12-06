@@ -1,0 +1,8 @@
+
+<i-card title="16-有套餐" i-class="next">
+  <view slot="content">阿斯蒂芬哈数据返回发送的会计法看见爱上打开房间爱上快乐放假奥斯卡了解到风口浪尖萨克拉飞机奥斯卡了的积分卡拉斯加罚款了设计费考虑到设计费艾丝凡拉速度快积分卡拉斯的积分卡吉林省打开房间爱上刻录机
+  </view>
+  <view slot="footer">
+  <i-button bind:click="handleClick" shape="circle" size="small" type="success"  i-class="btn">选择</i-button>
+  </view>
+</i-card>
