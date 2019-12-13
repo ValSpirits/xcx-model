@@ -3,7 +3,7 @@ const FONT_COLOR = '#f60';
 const BG_COLOR = '#fff7cc';
 
 Component({
-    externalClasses: ['i-class'],
+  externalClasses: ['i-class','i-noticebar-class'],
 
     properties: {
         closable: {

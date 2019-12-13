@@ -1,22 +1,36 @@
-<i-notice-bar icon="systemprompt"i-class="head">
-    请于29:30秒内完成订单
+<i-notice-bar icon="systemprompt"i-class="head" i-noticebar-class="notice">
+        {{network.phone}}已预占
+    ，请在
+      <view class= "big">
+      {{targetTime}}
+      </view>
+    完成订单
 </i-notice-bar>
 <i-panel title="身份证人像面" >
+  <view class="next"></view>
     <view class="show">
-      <image class="img" mode="scaleToFill" src="/img/u1.png"></image>
+      <image class="img" mode="scaleToFill" src="{{idCardFront?idCardFront:'/img/u1.png'}}" bindtap="chooseImage" data-picture="idCardFront">
+      </image>
     </view>
+  <view class="next"></view>
 </i-panel>
 
 <i-panel title="身份证国徽面" >
+  <view class="next"></view>
     <view class="show">
-      <image class="img" mode="scaleToFill" src="/img/u2.png"></image>
+      <image class="img" mode="scaleToFill" src="{{idCardBack?idCardBack:'/img/u2.png'}}" bindtap="chooseImage" data-picture="idCardBack"></image>
     </view>
+  <view class="next"></view>
 </i-panel>
 
 <i-panel title="正面免冠照" >
+  <view class="next"></view>
     <view class="show">
-      <image class="img" mode="scaleToFill" src="/img/u4.png"></image>
+      <image class="img" mode="scaleToFill" src="{{facePic?facePic:'/img/u4.png'}}" bindtap="chooseImage" data-picture="facePic"></image>
     </view>
+  <view class="next"></view>
 </i-panel>
 
 <i-button bind:click="handleClick" type="primary" shape="circle" size="small">提交</i-button>
+
+<i-toast id="toast" />

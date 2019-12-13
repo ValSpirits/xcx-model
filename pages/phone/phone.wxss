@@ -31,9 +31,16 @@
 }
 
 .mcard {
-  padding: 0px 16px!important;
+  padding: 0px 1px!important;
   color: #80848f;
-  height: 36px
+  height: 36px;
+  margin-left: 3px!important;
+  margin-right: 3px!important;
+}
+
+.mcard image{
+  width: 20px;
+  height: 20px;
 }
 
 .next {
@@ -53,4 +60,30 @@
 
 .input{
   height: 45!important;
+}
+.loading{
+    display: inline-block;
+    margin-right: 12px;
+    vertical-align: middle;
+    width: 20px;
+    height: 20px;
+    background: transparent;
+    border-radius: 50%;
+    border: 2px solid #2d8cf0;
+    border-color: #2d8cf0 #2d8cf0 #2d8cf0 transparent;
+    animation: loading-spin 0.6s linear;
+    animation-iteration-count: infinite;
+}
+
+.container{
+  text-align: center
+}
+
+@keyframes loading-spin {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }

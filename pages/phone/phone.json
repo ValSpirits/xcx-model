@@ -14,6 +14,7 @@
     "i-cell-group": "/dist/cell-group/index",
     "i-card": "/dist/card/index",
     "i-icon": "/dist/icon/index",
-    "i-action-sheet": "/dist/action-sheet/index"
+    "i-action-sheet": "/dist/action-sheet/index",
+    "i-toast": "/dist/toast/index"
   }
 }

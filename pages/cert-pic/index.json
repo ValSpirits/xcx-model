@@ -2,6 +2,7 @@
   "usingComponents": {
     "i-panel": "/dist/panel/index",
     "i-button": "/dist/button/index",
-    "i-notice-bar": "/dist/notice-bar/index"
+    "i-notice-bar": "/dist/notice-bar/index",
+    "i-toast": "/dist/toast/index"
   }
 }

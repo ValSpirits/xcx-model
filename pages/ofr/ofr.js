@@ -1,3 +1,5 @@
+const app = getApp();
+
 // pages/ofr/ofr.js
 Page({
 
@@ -5,31 +7,23 @@ Page({
    * 页面的初始数据
    */
   data: {
-    fruit: [{
-      id: 1,
-      name: '香蕉',
-    }, {
-      id: 2,
-      name: '苹果'
-    }, {
-      id: 3,
-      name: '西瓜'
-    }, {
-      id: 4,
-      name: '葡萄',
-    }],
-    current: '苹果',
-    position: 'right',
-    animal: '熊猫',
-    checked: false,
-    disabled: false,
+      ofrList:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    let that = this;
+    wx.request({
+      url: app.globalData.baseUrl + 　'crm/getOfrList',
+      success(res) {
+        console.log(res.data.resList)
+        that.setData({
+          ofrList: res.data.resList
+        })
+      }
+    })
   },
 
   /**
@@ -81,9 +75,17 @@ Page({
 
   },
 
-  handleFruitChange({ detail = {} }) {
-    this.setData({
-      current: detail.value
-    });
-  },
+  handleClick(e){
+    var pages = getCurrentPages()    //获取加载的页面( 页面栈 )
+    var currentPage = pages[pages.length - 1]  // 获取当前页面
+    var prevPage = pages[pages.length - 2]    //获取上一个页面
+
+　　prevPage.setData({
+      ofr: e.currentTarget.dataset.ofr
+　　})
+
+    wx.navigateBack({
+      delta: 1
+    })
+  }
 })

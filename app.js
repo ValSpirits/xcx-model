@@ -7,11 +7,25 @@ App({
     wx.setStorageSync('logs', logs)
 
     // 登录
-    wx.login({
-      success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-      }
-    })
+    // wx.login({
+    //   success: res => {
+    //     if (res.code) {
+    //       wx.request({
+    //         url: this.globalData.baseUrl + 'xcx/getSession',
+    //         data:{
+    //           code:res.code
+    //         },
+    //         success:function(r){
+    //           console.log(r)
+    //           wx.setStorageSync("sessionId", r.data.resObject)
+    //         }
+    //       })
+    //     } else {
+    //       console.log('获取用户登录态失败！' + res.errMsg)
+    //     }
+    //     // 发送 res.code 到后台换取 openId, sessionKey, unionId
+    //   }
+    // })
     // 获取用户信息
     wx.getSetting({
       success: res => {

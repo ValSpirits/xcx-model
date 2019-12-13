@@ -1,26 +1,35 @@
 <import src="../model/model.wxml"/>
-<i-notice-bar icon="systemprompt"i-class="head">
-    请于29:30秒内完成订单
+<i-notice-bar icon="systemprompt"i-class="head" i-noticebar-class="notice">
+    {{phone}}已预占
+    ，请在
+      <view class= "big">
+      {{targetTime}}
+      </view>
+    <!-- <i-count-down target="{{targetTime}}" countdown-class="big"
+            clear-timer="{{clearTimer}}"></i-count-down> -->
+    完成订单
 </i-notice-bar>
 
 <i-panel title="个人信息">
-  <i-input value="{{ value1 }}" title="机主姓名" autofocus placeholder="请输入真实姓名" />
-  <i-input value="{{ value2 }}" type="number" title="身份证号码" placeholder="请输入身份证号码" />
-  <i-input value="{{ value3 }}" type="textarea" title="身份证地址" placeholder="请输入身份证地址(最多100字)" maxlength="100" />
+  <i-input value="{{ ownerName }}" title="机主姓名" autofocus placeholder="请输入真实姓名" bind:change="onInput"/>
+  <i-input value="{{ cardNumber }}" type="number" title="身份证号码" placeholder="请输入身份证号码" bind:change="cnInput"/>
+  <i-input value="{{ cardAddress }}" type="textarea" title="身份证地址" placeholder="请输入身份证地址(最多100字)" maxlength="100"          bind:change="caInput"/>
 </i-panel>
 
 <i-panel title="寄送地址">
-  <i-input value="{{ value1 }}" title="收件人" autofocus placeholder="收件人名称" />
-  <i-input value="{{ value2 }}" type="number" title="联系电话" placeholder="请输入联系电话" />
+  <i-input value="{{ receiver }}" title="收件人" autofocus placeholder="收件人名称" bind:change="receiverInput"/>
+  <i-input value="{{ linkPhone }}" type="number" title="联系电话" placeholder="请输入联系电话" bind:change="lpInput" />
   <view class="row">
-    <i-input value="{{province}} {{city}} {{county}}" title="地址" disabled='true'/>
+    <i-input value="{{province}} {{city}} {{county}}" title="地址" disabled='true' placeholder="请选择地址" i-class ="address"/>
     <view class="right">
         <i-icon type="brush" size="28" color="#80848f" bindtap="translate"></i-icon>
     </view>
   </view>
-  <i-input value="{{ value3 }}" type="textarea" title="详细地址" placeholder="请输入邮寄地址"/>
+  <i-input value="{{ detailAddress }}" type="textarea" bind:change="daInput" title="详细地址" placeholder="请输入详细地址"/>
 </i-panel>
 
 <i-button bind:click="handleClick" type="primary" shape="circle" size="small" i-class="next">下一步</i-button>
 
 <template is="areaData" data="{{...item}}"/>
+
+<i-toast id="toast" />

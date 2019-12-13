@@ -4,6 +4,8 @@
     "i-notice-bar": "/dist/notice-bar/index",
     "i-input": "/dist/input/index",
     "i-button": "/dist/button/index",
-    "i-icon": "/dist/icon/index"
+    "i-icon": "/dist/icon/index",
+    "i-count-down": "/dist/count-down/index",
+    "i-toast": "/dist/toast/index"
   }
 }

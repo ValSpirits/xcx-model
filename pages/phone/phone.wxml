@@ -1,10 +1,10 @@
 <view>   
 <i-row i-class= "row">
     <i-col span="18" i-class='col-class'>
-      <i-input value="{{ phone }}" title="号码" autofocus placeholder="请输入号码" i-class="input"/>
+      <i-input value="{{ phone }}" title="号码" autofocus placeholder="请输入号码" i-class="input" bind:change="numberInput" maxlength="11"/>
     </i-col>
     <i-col span="3" offset="3" i-class='col-class'>
-      <i-icon type="search" size="22" color="#80848f"/>
+      <i-icon type="search" size="22" color="#80848f" bindtap="searchNumber"/>
       <!-- <i-button i-class="but" bind:click="handleClick" type="primary">搜索</i-button> -->
     </i-col>
 </i-row>
@@ -30,7 +30,7 @@
 </i-row>
 <i-row i-class= "row">
     <i-col span="18" i-class='col-class'>
-      <i-input value="{{ value5 }}"  title="套餐" disabled='true' placeholder="请选择套餐"/>
+      <i-input value="{{ ofr.ofrName }}"  title="套餐" disabled='true' placeholder="请选择套餐"/>
     </i-col>
     <i-col span="3" i-class='col-class' offset="3">
       <i-icon type="enter" bindtap="toOfr" size="22" color="#80848f"/>
@@ -49,56 +49,35 @@
         <i-divider i-class="ider"></i-divider>
     </view> 
 
-
-    <!-- <i-cell-group>
-        <i-cell title="电信" label="上海" value="17002110035"></i-cell>
-        <i-cell title="电信" label="上海" value="17002110035"></i-cell>
-        <i-cell title="电信" label="上海" value="17002110035"></i-cell>
-    </i-cell-group> -->
-
 <view>
-    <i-card title="电信" extra="上海" content="17002110035" i-class="mcard">
-    </i-card>
+  <view wx:for="{{numbers}}" wx:if="{{numbers.length>0}}">
+      <i-card title="{{item.telTypeDes}}" extra="{{item.area}}" content="{{item.number}}" full i-class="mcard"
+       thumb="{{index==numberIndex?'/img/c1.png':'/img/c2.png'}}" bindtap="changeNumber" data-index="{{index}}">
+        <!-- <view slot="content">{{item.number}}</view> -->
+      </i-card>
     <view class='next'></view>
-
-    <i-card title="电信" extra="上海" content="17002110035" i-class="mcard">
-    </i-card>
-    <view class='next'></view>
-
-    <i-card title="电信" extra="上海" content="17002110035" i-class="mcard">
-    </i-card>
-    <view class='next'></view>
-
-    <i-card title="电信" extra="上海" content="17002110035" i-class="mcard">
-    </i-card>
-    <view class='next'></view>
-
-    <i-card title="电信" extra="上海" content="17002110035" i-class="mcard">
-    </i-card>
-    <view class='next'></view>
-
-    <i-card title="电信" extra="上海" i-class="mcard" content="17002110035">
-    </i-card>
-    <view class='next'></view>
-
-        <i-card title="电信" extra="上海" i-class="mcard" content="17002110035">
-    </i-card>
-    <view class='next'></view>
-
-        <i-card title="电信" extra="上海" i-class="mcard" content="17002110035">
-    </i-card>
-    <view class='next'></view>
+  </view>
+  <view style="text-align: center;" wx:if="{{numbers.length==0 && !loading}}">
+      <image style="width: 64px; height: 64px;" src="/img/null.png" ></image>
+      <view> 抱歉，暂无此资源！</view>
+  </view>
+  <view wx:if="{{loading}}" class="container">
+      <i-spin custom>
+        <view class="loading"></view>
+      </i-spin>
+  </view>
 </view>
 
-<view class='next'></view>
-<view class="icon">
-<i-icon type="refresh" size="26" color="#2d8cf0"></i-icon>换一批
+  <view wx:if="{{numbers.length>0}}">
+    <view class='next'></view>
+    <view class="icon" bindtap="random">
+    <i-icon type="refresh" size="26" color="#2d8cf0"></i-icon>换一批
+    </view>
+    <view class='next'></view>
+    <i-button bind:click="handleClick" type="primary" shape="circle" size="small">下一步</i-button>
+  </view>
 </view>
-<view class='next'></view>
-<i-button bind:click="handleClick" type="primary" shape="circle" size="small">下一步</i-button>
-</view>
-
-
-
 
 <i-action-sheet visible="{{ visible }}" actions="{{ actions }}" bind:click="handleClickItem" />
+
+<i-toast id="toast" />
