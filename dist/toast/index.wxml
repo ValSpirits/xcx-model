@@ -1,4 +1,5 @@
-<view class="i-toast-mask" wx:if="{{ visible && mask }}" bindtap="handleHide"></view>
+<view class="i-mask-class i-toast-mask" wx:if="{{ visible && mask && hide }}" bindtap="handleHide"></view>
+<view class="i-mask-class i-toast-mask" wx:if="{{ visible && mask && !hide }}" bindtap=""></view>
 <view class="i-class i-toast" wx:if="{{ visible }}">
     <block wx:if="{{ type !== 'default' }}">
         <view class="i-toast-type">

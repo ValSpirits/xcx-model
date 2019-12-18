@@ -34,3 +34,8 @@
 .next {
   height: 20px
 }
+
+.mask{
+  background-color: rgb(10, 10, 10);
+  opacity: 0.5
+}

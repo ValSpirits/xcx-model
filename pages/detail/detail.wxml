@@ -1,5 +1,5 @@
 <import src="../model/model.wxml"/>
-<i-notice-bar icon="systemprompt"i-class="head" i-noticebar-class="notice">
+<i-notice-bar icon="systemprompt"i-class="head" i-noticebar-class="notice" wx:if="{{network.payType == 0}}">
     {{phone}}已预占
     ，请在
       <view class= "big">
@@ -10,14 +10,14 @@
     完成订单
 </i-notice-bar>
 
-<i-panel title="个人信息">
-  <i-input value="{{ ownerName }}" title="机主姓名" autofocus placeholder="请输入真实姓名" bind:change="onInput"/>
+<i-panel title="个人信息" i-title-class="title">
+  <i-input value="{{ ownerName }}" title="机主姓名" placeholder="请输入真实姓名" bind:change="onInput"/>
   <i-input value="{{ cardNumber }}" type="number" title="身份证号码" placeholder="请输入身份证号码" bind:change="cnInput"/>
   <i-input value="{{ cardAddress }}" type="textarea" title="身份证地址" placeholder="请输入身份证地址(最多100字)" maxlength="100"          bind:change="caInput"/>
 </i-panel>
 
-<i-panel title="寄送地址">
-  <i-input value="{{ receiver }}" title="收件人" autofocus placeholder="收件人名称" bind:change="receiverInput"/>
+<i-panel title="寄送地址" i-title-class="title">
+  <i-input value="{{ receiver }}" title="收件人" placeholder="收件人名称" bind:change="receiverInput"/>
   <i-input value="{{ linkPhone }}" type="number" title="联系电话" placeholder="请输入联系电话" bind:change="lpInput" />
   <view class="row">
     <i-input value="{{province}} {{city}} {{county}}" title="地址" disabled='true' placeholder="请选择地址" i-class ="address"/>
@@ -32,4 +32,4 @@
 
 <template is="areaData" data="{{...item}}"/>
 
-<i-toast id="toast" />
+<i-toast id="toast" i-mask-class="{{isShow?'mask':''}}"/>

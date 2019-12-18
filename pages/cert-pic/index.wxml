@@ -9,7 +9,7 @@
 <i-panel title="身份证人像面" >
   <view class="next"></view>
     <view class="show">
-      <image class="img" mode="scaleToFill" src="{{idCardFront?idCardFront:'/img/u1.png'}}" bindtap="chooseImage" data-picture="idCardFront">
+      <image class="img" mode="scaleToFill" src="{{idCardFront?idCardFront:network.orderStatus==7?'/img/u1.png':url1+network.orderno}}" bindtap="chooseImage" data-picture="idCardFront">
       </image>
     </view>
   <view class="next"></view>
@@ -18,7 +18,7 @@
 <i-panel title="身份证国徽面" >
   <view class="next"></view>
     <view class="show">
-      <image class="img" mode="scaleToFill" src="{{idCardBack?idCardBack:'/img/u2.png'}}" bindtap="chooseImage" data-picture="idCardBack"></image>
+      <image class="img" mode="scaleToFill" src="{{idCardBack?idCardBack:network.orderStatus==7?'/img/u2.png':url2+network.orderno}}" bindtap="chooseImage" data-picture="idCardBack"></image>
     </view>
   <view class="next"></view>
 </i-panel>
@@ -26,11 +26,11 @@
 <i-panel title="正面免冠照" >
   <view class="next"></view>
     <view class="show">
-      <image class="img" mode="scaleToFill" src="{{facePic?facePic:'/img/u4.png'}}" bindtap="chooseImage" data-picture="facePic"></image>
+      <image class="img" mode="scaleToFill" src="{{facePic?facePic:network.orderStatus==7?'/img/u4.png':url3+network.orderno}}" bindtap="chooseImage" data-picture="facePic"></image>
     </view>
   <view class="next"></view>
 </i-panel>
 
 <i-button bind:click="handleClick" type="primary" shape="circle" size="small">提交</i-button>
 
-<i-toast id="toast" />
+<i-toast id="toast" i-mask-class="{{isShow?'mask':''}}"/>

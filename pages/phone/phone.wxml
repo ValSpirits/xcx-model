@@ -79,5 +79,4 @@
 </view>
 
 <i-action-sheet visible="{{ visible }}" actions="{{ actions }}" bind:click="handleClickItem" />
-
-<i-toast id="toast" />
+<i-toast id="toast" i-mask-class="{{isShow?'mask':''}}"/>

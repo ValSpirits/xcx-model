@@ -15,6 +15,7 @@
     "i-card": "/dist/card/index",
     "i-icon": "/dist/icon/index",
     "i-action-sheet": "/dist/action-sheet/index",
-    "i-toast": "/dist/toast/index"
+    "i-toast": "/dist/toast/index",
+    "i-modal": "/dist/modal/index"
   }
 }

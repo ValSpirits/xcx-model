@@ -7,6 +7,7 @@
     "i-icon": "/dist/icon/index",
     "i-card": "/dist/card/index",
     "i-button": "/dist/button/index",
-    "i-radio": "/dist/radio/index"
+    "i-radio": "/dist/radio/index",
+    "i-modal": "/dist/modal/index"
   }
 }

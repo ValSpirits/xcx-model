@@ -28,10 +28,10 @@ Page({
     numbers: [],
     allNumber:[],
     numberIndex:null,
-    loading:false
+    loading:false,
+    isShow:false
   },
   onLoad: function() {
-
     // let that = this;
     // wx.request({
     //   url: app.globalData.baseUrl + 'crm/getCRMNumber',
@@ -46,7 +46,6 @@ Page({
   },
   
   onShow: function(){
-    console.log(434)
     if (session.isExpire()) {
       session.setSession();
     }
@@ -169,7 +168,8 @@ Page({
     }
 
     const number = this.data.numbers[this.data.numberIndex];
-    console.log(number)
+    var that =this;
+    that.showLoad();
     wx.request({
       url: app.globalData.baseUrl + 'network/createOrder',
       header:{"Cookie": "JSESSIONID="+wx.getStorageSync("sessionId")},
@@ -181,23 +181,48 @@ Page({
         mealId: this.data.ofr.ofrId
       },
       success(res) {
-        console.log(res.data.resObject.orderno)
-        wx.navigateTo({
-          url: '/pages/detail/detail',
-          success: function (n) {
-            // 通过eventChannel向被打开页面传送数据
-            n.eventChannel.emit('acceptDataFromOpenerPage', { data: res.data.resObject })
-          }
-        })
+        that.hideLoad();
+        if (res.data.responseCode == 10000){
+          wx.navigateTo({
+            url: '/pages/detail/detail',
+            success: function (n) {
+              // 通过eventChannel向被打开页面传送数据
+              n.eventChannel.emit('acceptDataFromOpenerPage', { data: res.data.resObject })
+            }
+          })
+        }else{
+          $Toast({
+            content: res.data.responseMsg,
+            type: 'error'
+          });
+        }
       },
       fail(f){
+        that.hideLoad();
         $Toast({
           content: '系统繁忙，请稍后重试！',
           type: 'error'
         });
       }
     })
+  },
 
-    console.log(this.data.ofr.ofrId)
+  showLoad(){
+    this.setData({
+      isShow: true
+    })
+    $Toast({
+      content: '加载中',
+      type: 'loading',
+      duration: 0,
+      hide: false
+    });
+  },
+
+  hideLoad(){
+    $Toast.hide();
+    this.setData({
+      isShow: false
+    })
   }
 })

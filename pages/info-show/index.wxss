@@ -5,20 +5,20 @@
     /* background: rgba(0, 153, 229, .7); */
 
   height: 32px;
-  line-height: 32px;
+  /* line-height: 32px; */
   font-size: 14px;
 }
 
-.panel {
-  color:burlywood;
-  /* padding: 10px 8px 5px!important; */
+.title{
+  font-size: 16px!important;
+  color: #3399FF!important;
+  font-weight: bold!important
 }
 
 .rightCol {
   text-align: left;
   font-size: 14px;
   text-overflow:ellipsis;
-  color: black!important;
   word-wrap:break-word
 }
 
@@ -44,5 +44,33 @@
 }
 
 .next{
+  height: 20px;
+}
+
+.next1{
   margin-top: 8px!important; 
+}
+
+
+.big{
+  font-size: 15px;
+  color: #3399FF;
+  font-weight: bold;
+}
+
+.notice{
+  display: flex;
+}
+
+.modal{
+  width: 100vw!important;
+  height: 100vh!important;
+}
+
+.main{
+  height: 90vh;
+}
+
+.body{
+  max-height: 70vh!important;
 }

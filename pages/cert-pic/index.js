@@ -7,13 +7,16 @@ Page({
    */
   data: {
       network:{
-          orderno:"8888888"
       },
       
       targetTime: 0,
       idCardFront:'',
       idCardBack:'',
-      facePic:''
+      facePic:'',
+      url1: app.globalData.baseUrl + "wXOrdersAction?requestType=getPic&picName=idCardFront&cardRemakeBean.order_id=",
+      url2: app.globalData.baseUrl + "wXOrdersAction?requestType=getPic&picName=idCardBack&cardRemakeBean.order_id=",
+      url3: app.globalData.baseUrl + "wXOrdersAction?requestType=getPic&picName=facePic&cardRemakeBean.order_id=",
+      isShow:false
   },
 
   /**
@@ -21,14 +24,17 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    // const eventChannel = this.getOpenerEventChannel()
-    // // 监听acceptDataFromOpenerPage事件，获取上一页面通过eventChannel传送到当前页面的数据
-    // eventChannel.on('acceptDataFromOpenerPage', function (data) {
-    //   that.setData({
-    //     network: data.data
-    //   })
-    //   that.countTargetTime();
-    // })
+    const eventChannel = this.getOpenerEventChannel()
+    // 监听acceptDataFromOpenerPage事件，获取上一页面通过eventChannel传送到当前页面的数据
+    eventChannel.on('acceptDataFromOpenerPage', function (data) {
+      console.log(data.data)
+      that.setData({
+        network: data.data,
+      })
+      if(data.data.payType == 0){
+        that.countTargetTime();
+      }
+    })
   },
 
   /**
@@ -82,21 +88,21 @@ Page({
 
   handleClick(){
 
-    if(!this.data.idCardFront){
+    if(this.data.network.orderStatus == 7 && !this.data.idCardFront){
       $Toast({
         content: '请上传身份证人像面！',
         type: 'warning'
       });
       return;
     }
-    if(!this.data.idCardBack){
+    if (this.data.network.orderStatus == 7 && !this.data.idCardBack){
       $Toast({
         content: '请上传身份证国徽面！',
         type: 'warning'
       });
       return;
     }
-    if(!this.data.facePic){
+    if (this.data.network.orderStatus == 7 && !this.data.facePic){
       $Toast({
         content: '请上传正面免冠照！',
         type: 'warning'
@@ -104,15 +110,8 @@ Page({
       return;
     }
 
-    if(this.uploadPicture()){
-    wx.navigateTo({
-      url: '/pages/info-show/index',
-      success: function (n) {
-        // 通过eventChannel向被打开页面传送数据
-        n.eventChannel.emit('acceptDataFromOpenerPage', { data: network })
-      }
-    })
-    }
+    this.uploadPicture("idCardFront");
+
   },
 
   countTargetTime() {
@@ -170,67 +169,86 @@ Page({
   },
 
 
-  uploadPicture: function (tempFilePath,orderno,picture){
+  uploadPicture: function (picture){
     var that = this;
-    wx.uploadFile({
-      url: app.globalData.baseUrl + 'network/uploadPic',
-      filePath: that.data.idCardFront[0],
-      name: 'face',
-      formData: {
-        picture:"idCardFront",
-        orderno: that.data.network.orderno
-      },
-      success: function(res1) {
-        if(res1.data.responseCode == "10000"){
-          wx.uploadFile({
-            url: app.globalData.baseUrl + 'network/uploadPic',
-            filePath: that.data.idCardBack[0],
-            name: 'face',
-            formData: {
-              picture: "idCardBack", 
-              orderno: that.data.network.orderno
-             },
-            success: function (res2) {
-              if (res2.data.responseCode == "10000") {
-                wx.uploadFile({
-                  url: app.globalData.baseUrl + 'network/uploadPic',
-                  filePath: tempFilePath[0],
-                  name: 'face',
-                  formData: {
-                          picture: "facePic",
-                          orderno: that.data.network.orderno 
-                  },
-                  success: function (res3) {
-                    if (res3.data.responseCode == "10000") {
-                        return true;
-                    }
-                  },
-                  fail: function (f1) {
-                    $Toast({
-                      content: '上传正面免冠照失败！',
-                      type: 'warning'
-                    });
+    that.showLoad();
+    if (picture == "idCardFront" ? that.data.idCardFront : picture == "idCardBack" ? that.data.idCardBack : that.data.facePic){
+            wx.uploadFile({
+              url: app.globalData.baseUrl + 'network/uploadPic',
+              filePath: picture == "idCardFront" ? that.data.idCardFront[0] : picture == "idCardBack" ? that.data.idCardBack[0] : that.data.facePic[0],
+              name: 'face',
+              formData: {
+                picture: picture,
+                orderno: that.data.network.orderno
+              },
+              success: function (res3) {
+                const r3 = JSON.parse(res3.data)
+                if (r3.responseCode == "10000") {
+                  if (picture == "idCardFront"){
+                    that.uploadPicture("idCardBack")
+                  } else if (picture == "idCardBack"){
+                    that.uploadPicture("facePic")
+                  }else{
+                    that.hideLoad();
+                    wx.reLaunch({
+                      url: '/pages/info-show/index?orderno=' + that.data.network.orderno,
+                      success: function (n) {
+
+                      }
+                    })
                   }
-                })
+                }else{
+                  that.hideLoad();
+                  $Toast({
+                    content: r3.responseMsg,
+                    type: 'warning'
+                  });
+                  return;
+                }
+              },
+              fail: function (f1) {
+                that.hideLoad();
+                $Toast({
+                  content: '上传照片失败！',
+                  type: 'warning'
+                });
+                return;
               }
-            },
-            fail: function (f2) {
-              $Toast({
-                content: '上传身份证国徽面失败！',
-                type: 'warning'
-              });
-            }
-          })
-        }
-      },
-      fail: function(f3) {
-        $Toast({
-          content: '上传身份证人像面失败！',
-          type: 'warning'
-        });
+            })
+    }else{
+      if (picture == "idCardFront"){
+        that.uploadPicture("idCardBack")
+      } else if (picture == "idCardBack" ){
+        that.uploadPicture("facePic")
+      }else{
+        that.hideLoad();
+        wx.reLaunch({
+          url: '/pages/info-show/index?orderno=' + that.data.network.orderno,
+          success: function (n) {
+
+          }
+        })
       }
+    }
+  },
+
+  showLoad() {
+    this.setData({
+      isShow: true
     })
-    return false;
+    $Toast({
+      content: '加载中',
+      type: 'loading',
+      duration: 0,
+      hide: false
+    });
+  },
+
+  hideLoad() {
+    $Toast.hide();
+    this.setData({
+      isShow: false
+    })
   }
 
 })

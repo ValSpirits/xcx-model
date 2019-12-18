@@ -1,5 +1,6 @@
 var model = require('../model/model.js')
 const { $Toast } = require('../../dist/base/index');
+const app = getApp();
 
 var show = false;
 var item = {};
@@ -10,7 +11,6 @@ Page({
    */
   data: {
     item: {
-      show: show,
         orderno:'',
         ownerName:'',
         cardNumber:'',
@@ -21,7 +21,9 @@ Page({
         createTime:'',
         phone:'',
         cardAddress:'',
-      targetTime: 0
+      targetTime: 0,
+      network:{},
+      isShow: false
     }
   },
 
@@ -33,12 +35,13 @@ Page({
     const eventChannel = this.getOpenerEventChannel()
     // 监听acceptDataFromOpenerPage事件，获取上一页面通过eventChannel传送到当前页面的数据
     eventChannel.on('acceptDataFromOpenerPage', function (data) {
-      that.setData({
-         orderno: data.data.orderno,
-         createTime:data.data.createTime,
-         phone:data.data.phone
-      })
-      that.countTargetTime();
+      // that.setData({
+      //    orderno: data.data.orderno,
+      //    createTime:data.data.createTime,
+      //    phone:data.data.phone
+      // })
+      that.getOrder(data.data.orderno)
+      // that.countTargetTime();
     })
   },
 
@@ -111,7 +114,7 @@ Page({
       });
       return;
     }
-    if (!this.data.caedAddress) {
+    if (!this.data.cardAddress) {
       $Toast({
         content: '请填写身份证地址！',
         type: 'warning'
@@ -158,16 +161,43 @@ Page({
       createTime: this.data.createTime,
       phone: this.data.phone,
       cardAddress: this.data.cardAddress,
-      address: this.data.province + this.data.city + this.data.county, 
+      address: (this.data.province ? this.data.province : '') + this.data.city + (this.data.county ? this.data.county:''), 
+      orderStatus:this.data.network.orderStatus,
+      payType: this.data.network.payType
     }
-
-    wx.navigateTo({
-      url: '/pages/cert-pic/index',
-      success: function (n) {
-        // 通过eventChannel向被打开页面传送数据
-        n.eventChannel.emit('acceptDataFromOpenerPage', { data: network })
+    var that = this;
+    that.showLoad();
+    wx.request({
+      url: app.globalData.baseUrl + 'network/updateOrderFromXcx',
+      header: { "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId") },
+      data: network,
+      success(res) {
+        that.hideLoad();
+        if(res.data.responseCode == 10000){
+          wx.navigateTo({
+            url: '/pages/cert-pic/index',
+            success: function (n) {
+              // 通过eventChannel向被打开页面传送数据
+              n.eventChannel.emit('acceptDataFromOpenerPage', { data: network })
+            }
+          })
+        }else{
+          $Toast({
+            content: res.data.responseMsg,
+            type: 'error'
+          });
+        }
+      },
+      fail(f) {
+        that.hideLoad();
+        $Toast({
+          content: '系统繁忙，请稍后重试！',
+          type: 'error'
+        });
       }
     })
+
+
   },
 
 
@@ -237,7 +267,7 @@ Page({
   },
   caInput(e) {
     this.setData({
-      caedAddress: e.detail.detail.value
+      cardAddress: e.detail.detail.value
     })
   },
   cnInput(e) {
@@ -258,6 +288,69 @@ Page({
   lpInput(e) {
     this.setData({
       linkPhone: e.detail.detail.value
+    })
+  },
+  getOrder(orderno) {
+    var that = this;
+    that.showLoad();
+    wx.request({
+      url: app.globalData.baseUrl + 'network/getOrder',
+      data: {
+        orderno: orderno,
+      },
+      success(res) {
+        that.hideLoad();
+        if (res.data.responseCode == 10000) {
+          console.log(res.data.resObject)
+          const network = res.data.resObject;
+          that.setData({
+            network:network,
+            orderno: network.orderno,
+            ownerName: network.ownerName,
+            cardNumber: network.cardNumber,
+            linkPhone: network.logistics ? network.logistics.linkPhone:'',
+            city: network.logistics ?network.logistics.address:'',
+            detailAddress: network.logistics ?network.logistics.detailAddress:'',
+            receiver: network.logistics ?network.logistics.receiver:'',
+            createTime: network.createTime,
+            phone: network.phone,
+            cardAddress: network.cardAddress,
+          })
+          if (res.data.resObject.payType == 0) {
+            that.countTargetTime();
+          }
+        }else{
+          $Toast({
+            content: res.data.responseCode,
+            type: 'error'
+          });
+        }
+      },
+      fail(res2) {
+        that.hideLoad();
+        $Toast({
+          content: '系统繁忙，请稍后重试！',
+          type: 'error'
+        });
+      }
+    })
+  },
+  showLoad() {
+    this.setData({
+      isShow: true
+    })
+    $Toast({
+      content: '加载中',
+      type: 'loading',
+      duration: 0,
+      hide: false
+    });
+  },
+
+  hideLoad() {
+    $Toast.hide();
+    this.setData({
+      isShow: false
     })
   }
 

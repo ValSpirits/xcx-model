@@ -6,12 +6,13 @@ const default_data = {
     duration: 2,
     mask: true,
     type: 'default', // default || success || warning || error || loading
+    hide:true,
 };
 
 let timmer = null;
 
 Component({
-    externalClasses: ['i-class'],
+  externalClasses: ['i-class','i-mask-class'],
 
     data: {
         ...default_data
