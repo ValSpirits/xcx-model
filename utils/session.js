@@ -5,10 +5,9 @@ const isExpire = () => {
     header: { "Cookie": "JSESSIONID=" + wx.getStorageSync("sessionId") },
     url: app.globalData.baseUrl + 'xcx/isExpire',
     success: function (r) {
-      if(r.data.code=="10000"){
-        return false;
-      }else{
-        return true;
+      console.log(r)
+      if(!r.data.success){
+        setSession();
       }
     }
   })
@@ -20,7 +19,7 @@ const setSession = () => {
     success: res => {
       if (res.code) {
         wx.request({
-          url: this.globalData.baseUrl + 'xcx/getSession',
+          url: app.globalData.baseUrl + 'xcx/getSession',
           data: {
             code: res.code
           },

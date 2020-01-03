@@ -46,9 +46,7 @@ Page({
   },
   
   onShow: function(){
-    if (session.isExpire()) {
-      session.setSession();
-    }
+    session.isExpire();
   },
 
   toCity(e) {
@@ -163,9 +161,7 @@ Page({
 
 
     //缓存session保证后台有openid
-    if (session.isExpire()) {
-      session.setSession();
-    }
+    session.isExpire();
 
     const number = this.data.numbers[this.data.numberIndex];
     var that =this;
