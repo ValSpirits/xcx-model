@@ -49,6 +49,7 @@ App({
   },
   globalData: {
     userInfo: null,
-    baseUrl: "http://192.168.2.65:8088/cjtcWeb2/"
+    baseUrl: "http://192.168.2.65:8001/",
+    baseUrl1: "http://wt.cjtc.net.cn/cjtcWeb2/"
   }
 })

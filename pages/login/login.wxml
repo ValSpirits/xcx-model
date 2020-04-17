@@ -1,0 +1,12 @@
+<view class = "container">
+  <i-avatar src="../../img/logo.png" size="large" i-class="avatar"></i-avatar>
+
+  <i-panel i-class="panel">
+    <i-input value="{{ name }}" title="用户" bind:change="bindNameInput" placeholder="请输入账户名" i-class="input"/>
+    <i-input value="{{ password }}" title="密码" bind:change="bindPasswordInput" placeholder="请输入密码"
+     i-class="input" type="password"/>
+    <i-button bind:click="login" type="primary"  loading="{{loading}}" size="small" disabled="{{loading}}">{{alias}}</i-button>
+  </i-panel>
+
+</view>
+<i-toast id="toast" />

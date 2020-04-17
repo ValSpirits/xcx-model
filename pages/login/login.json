@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "i-avatar": "/dist/avatar/index",
+    "i-panel": "/dist/panel/index",
+    "i-input": "/dist/input/index",
+    "i-button": "/dist/button/index",
+    "i-toast": "/dist/toast/index"
+  }
+}

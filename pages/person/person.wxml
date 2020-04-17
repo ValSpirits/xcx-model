@@ -1,0 +1,3 @@
+<i-cell-group i-class="cell">
+    <i-cell title="订单" is-link value="详细信息" i-class="cell" url="/pages/order/order"></i-cell>
+</i-cell-group>

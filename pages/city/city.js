@@ -16,7 +16,7 @@ Page({
   onLoad: function (options) {
     let that = this;
       wx.request({
-        url: app.globalData.baseUrl +　'area/getCites',
+        url: app.globalData.baseUrl1 +　'area/getCites',
         success(res){
           that.loadCity(res.data.resList);
         }

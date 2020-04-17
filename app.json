@@ -1,20 +1,41 @@
 {
   "pages": [
+    "pages/person/person",
+    "pages/login/login",
     "pages/phone/phone",
-    "pages/index/index",
     "pages/logs/logs",
     "pages/city/city",
     "pages/ofr/ofr",
     "pages/detail/detail",
     "pages/cert-pic/index",
-    "pages/info-show/index"
-    
+    "pages/info-show/index",
+    "pages/index/index",
+    "pages/order/order"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
+    "navigationBarTitleText": "长江时代",
     "navigationBarTextStyle": "black"
   },
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "tabBar": {
+    "color": "#a9b7b7",
+    "selectedColor": "#5cadff",
+    "borderStyle": "white",
+    "list": [
+      {
+        "selectedIconPath": "img/choose.png",
+        "iconPath": "img/choose1.png",
+        "pagePath": "pages/phone/phone",
+        "text": "在线选号"
+      },
+      {
+        "selectedIconPath": "img/my.png",
+        "iconPath": "img/my1.png",
+        "pagePath": "pages/person/person",
+        "text": "我的"
+      }
+    ]
+  }
 }
